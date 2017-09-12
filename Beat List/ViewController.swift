@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return funArray.count
     }
@@ -19,6 +19,11 @@ extension ViewController: UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("Section: \(indexPath.section) and Row: \(indexPath.row)")
+        funArray.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
     
 }
 
@@ -38,6 +43,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         masterTable.dataSource = self
+        masterTable.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
     }
 
